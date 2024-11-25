@@ -5,17 +5,18 @@ import ConditionalRender from './components/ConditionalRender';
 import ListRender from './components/ListRender';
 import ManageData from './components/ManageData';
 import ShowUserName from './components/ShowUserName';
-import CarDetails from './components/CarDetails';
+// import CarDetails from './components/CarDetails';
 import Fragment from './components/Fragment';
+import Container from './components/Container';
 
 function App() {
   // const name = "Celso"
   const [userName] = useState("Pedro")
-  const cars = [
-    {id: 1, brand:"Ferrari", color:"Vermelha", newCar: true, km: 0},
-    {id: 1, brand:"Lamborguini", color:"Preta", newCar: false, km: 30000},
-    {id: 1, brand:"BMW", color:"Prata", newCar: false, km: 234},
-  ]
+  // const cars = [
+  //   {id: 1, brand:"Ferrari", color:"Vermelha", newCar: true, km: 0},
+  //   {id: 1, brand:"Lamborguini", color:"Preta", newCar: false, km: 30000},
+  //   {id: 1, brand:"BMW", color:"Prata", newCar: false, km: 234},
+  // ]
 
   return (
     <div className="App">
@@ -34,20 +35,24 @@ function App() {
         {/* Props */}
         <ShowUserName name={userName}/>
         {/* Destructuring */}
-        <CarDetails brand="VW" km={100000} color="Azul" newCar={false} />
+        {/* <CarDetails brand="VW" km={100000} color="Azul" newCar={false} />
         <CarDetails brand="Ford" km={0} color="Vermelho" newCar={true} />
-        <CarDetails brand="Toyota" km={45000} color="Vermelho" newCar={false} />
+        <CarDetails brand="Toyota" km={45000} color="Vermelho" newCar={false} /> */}
         {/* loop em array de objetos */}
-        {cars.map((car) => (
+        {/* {cars.map((car) => (
           <CarDetails 
             brand={car.brand} 
             color={car.color}
             km={car.km}
             newCar={car.newCar}
           />
-        ))}
+        ))} */}
         {/* 48. Fragments */}
         <Fragment propFragment="teste" />
+        {/* Children */}
+        <Container myValue="testando">
+          <p>Este é o conteúdo do container</p>
+        </Container>
     </div>
   );
 }
