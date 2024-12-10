@@ -12,17 +12,20 @@ const MyForm = ({user}) => {
     }
     // console.log(name)
     // console.log(email)
+
+    const [bio, setBio] = useState("")
     
     const handleSubmit = (event) => {
         event.preventDefault(); // Evita o page reload
         console.log("Enviando o formulário")
-        console.log(name, email);
+        console.log(name, email, bio);
         
         // Validacao => Envio =>
 
         // 7 - limpar forms
         setName("")
         setEmail("")
+        setBio("")
     };
 
   return (
@@ -40,7 +43,6 @@ const MyForm = ({user}) => {
                     value={name}
                 />
             </div>
-            <input type="submit" value="enviar" />
             {/* 2 - label envolvendo input */}
             <label>
                 <span>E-mail:</span>
@@ -53,6 +55,17 @@ const MyForm = ({user}) => {
                     value={email}
                 />
             </label>
+            {/* 8 - textarea */}
+            <label>
+                <span>Bio:</span>
+                <textarea 
+                    name="bio" 
+                    placeholder="Descrição do usuário" 
+                    onChange={(e) => setBio(e.target.value)} 
+                    value={bio}>
+                </textarea>
+            </label>
+            <input type="submit" value="enviar" />
         </form>
     </div>
   )
