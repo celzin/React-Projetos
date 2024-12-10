@@ -10,6 +10,11 @@ function MyForm() {
                 <input type="text" name='name' placeholder='Digite o seu nome' />
             </div>
             <input type="submit" value="enviar" />
+            {/* 2 - label envolvendo input */}
+            <label>
+                <span>E-mail:</span>
+                <input type='email' name='email' placeholder="Digite o seu e-mail" />
+            </label>
         </form>
     </div>
   )
