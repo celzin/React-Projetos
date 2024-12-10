@@ -17,6 +17,12 @@ const MyForm = ({user}) => {
         event.preventDefault(); // Evita o page reload
         console.log("Enviando o formulário")
         console.log(name, email);
+        
+        // Validacao => Envio =>
+
+        // 7 - limpar forms
+        setName("")
+        setEmail("")
     };
 
   return (
