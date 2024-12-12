@@ -17,6 +17,8 @@ const stages = [
   {id: 1, name: "game"},
   {id: 1, name: "end"},
 ]
+// altera quantidade de tentativas
+const guessesQty = 3
 
 function App() {
   const [gameStage, setGameStage] = useState(stages[0].name);
@@ -92,14 +94,31 @@ function App() {
         ...actualWrongLetters,
         normalizedLetter
       ])
+
+      setGuesses((actualGuesses) => actualGuesses - 1)
+
     }
 
   }
 
-  console.log(guessedLetters)
-  console.log(wrongLetters)
+  const clearLetterStates = () => {
+    setGuessedLetters([])
+    setWrongLetters([])
+  }
+  // monitora a alteracao de um dado
+  useEffect(() => {
+    if(guesses <= 0) {
+      // resetar todos os states
+      clearLetterStates()
+
+      setGameStage(stages[2].name)
+    }
+  }, [guesses])
 
   const retry = () => {
+    setScore(0)
+    setGuesses(guessesQty)
+
     setGameStage(stages[0].name)
   }
 
