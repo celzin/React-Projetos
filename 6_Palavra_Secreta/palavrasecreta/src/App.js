@@ -2,7 +2,7 @@
 import './App.css';
 
 // React
-import {useEffect, useState} from "react"
+import {useCallback, useEffect, useState} from "react"
 
 // Data
 import {wordsList} from "./data/words"
@@ -33,7 +33,7 @@ function App() {
   const [guesses, setGuesses] = useState(5)
   const [score, setScore] = useState(50)
 
-  const pickedWordCategory = () => {
+  const pickedWordCategory = useCallback(() => {
     // escolhendo uma categoria aleatoria
     const categories = Object.keys(words)
     const category = 
@@ -46,10 +46,13 @@ function App() {
     console.log(word)
 
     return {word, category}
-  }
+  }, [words])
 
   // startar o game
-  const startGame = () => {
+  const startGame = useCallback(() => {
+    // limpando todas as letras
+    clearLetterStates()
+
     // escolhe palavra e escolhe categoria
     const {word, category} = pickedWordCategory()
     console.log(word, category)
@@ -69,7 +72,7 @@ function App() {
     setLetters(wordLetters)
 
     setGameStage(stages[1].name)
-  }
+  }, [pickedWordCategory])
 
   // processar letra de input
   const verifyLetter = (letter) => {
@@ -105,6 +108,9 @@ function App() {
     setGuessedLetters([])
     setWrongLetters([])
   }
+
+  // checa se as tentativas terminaram
+
   // monitora a alteracao de um dado
   useEffect(() => {
     if(guesses <= 0) {
@@ -114,6 +120,21 @@ function App() {
       setGameStage(stages[2].name)
     }
   }, [guesses])
+
+  // checa condicao de vitoria
+  useEffect(() => {
+    // transformando palavra em uma array de letras unicas
+    const uniqueLetters = [...new Set(letters)]
+    console.log(uniqueLetters)
+
+    // condicao de vitoria
+    if(guessedLetters.length === uniqueLetters.length) {
+      // adicionando pontuacao
+      setScore((actualScore) => actualScore += 100)
+      // restartar jogo com nova palavra
+      startGame()
+    }
+  }, [guessedLetters, letters, startGame]) // precisa monitorar todas funcoes usadas dentro
 
   const retry = () => {
     setScore(0)
