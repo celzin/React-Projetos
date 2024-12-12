@@ -2,7 +2,7 @@
 import './App.css';
 
 // React
-import {useCallback, useEffect, useState} from "react"
+import {useEffect, useState} from "react"
 
 // Data
 import {wordsList} from "./data/words"
@@ -31,7 +31,7 @@ function App() {
   const [guessedLetters, setGuessedLetters] = useState([])
   const [wrongLetters, setWrongLetters] = useState([])
   const [guesses, setGuesses] = useState(5)
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(50)
 
   const pickedWordCategory = () => {
     // escolhendo uma categoria aleatoria
@@ -136,7 +136,11 @@ function App() {
           guesses={guesses}
           score={score}
         />}
-      {gameStage === 'end' && <GameOver retry={retry} />}
+      {gameStage === 'end' && 
+        <GameOver 
+          retry={retry} 
+          score={score}
+        />}
     </div>
   );
 }
